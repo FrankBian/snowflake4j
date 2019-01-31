@@ -1,0 +1,11 @@
+@startuml
+IdConfig -> IdConfig: 配置初始化
+IdConfig ->IdServiceFactory: FactoryBean声明&IdConfig注入
+IdServiceFactory -> MachineIdService: ServiceLoader.load()获取扩展点实现
+MachineIdService -> MachineIdService: init()
+IdServiceFactory -> MachineIdService: get machineId
+MachineIdService -> IdServiceFactory: return MachineId
+IdServiceFactory -> IdService: 生成单例Bean
+IdService -> IdService: init()
+
+@enduml
