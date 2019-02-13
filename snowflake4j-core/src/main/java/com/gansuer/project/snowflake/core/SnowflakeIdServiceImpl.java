@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings("unused")
-@Service
 public class SnowflakeIdServiceImpl implements IdService {
 
-    @Autowired
     private IdGenerator idGenerator;
+
+    public SnowflakeIdServiceImpl(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
+    }
 
     public long generateId() {
         return idGenerator.nextId();
