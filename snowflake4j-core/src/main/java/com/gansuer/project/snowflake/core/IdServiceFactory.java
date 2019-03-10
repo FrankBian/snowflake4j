@@ -8,8 +8,9 @@ public class IdServiceFactory implements FactoryBean<IdService> {
 
     private MachineIdConfig machineIdConfig;
 
-    private void init() {
+    private String ips;
 
+    private void init() {
     }
 
     @Override public IdService getObject() throws Exception {
@@ -22,5 +23,23 @@ public class IdServiceFactory implements FactoryBean<IdService> {
 
     @Override public boolean isSingleton() {
         return true;
+    }
+
+    public MachineIdConfig getMachineIdConfig() {
+        return machineIdConfig;
+    }
+
+    public IdServiceFactory setMachineIdConfig(MachineIdConfig machineIdConfig) {
+        this.machineIdConfig = machineIdConfig;
+        return this;
+    }
+
+    public String getIps() {
+        return ips;
+    }
+
+    public IdServiceFactory setIps(String ips) {
+        this.ips = ips;
+        return this;
     }
 }
