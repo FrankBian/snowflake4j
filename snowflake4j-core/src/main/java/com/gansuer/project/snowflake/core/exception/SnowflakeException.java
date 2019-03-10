@@ -2,6 +2,7 @@ package com.gansuer.project.snowflake.core.exception;
 
 public class SnowflakeException extends RuntimeException {
 
+    private static final long serialVersionUID = 3490218806486418076L;
     private int code = 0;
 
     public SnowflakeException(int code) {

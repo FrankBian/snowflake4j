@@ -9,7 +9,7 @@ public interface IdService {
      *
      * @return
      */
-    long generateId();
+    Result<Long> generateId();
 
     /**
      * 解析Id
@@ -17,13 +17,13 @@ public interface IdService {
      * @param id
      * @return
      */
-    Id explainId(long id);
+    Result<Id> explainId(long id);
 
     /**
      * 根据元数据生成Id
      * @param idMeta
      * @return
      */
-    long makeId(Id idMeta);
+    Result<Long> makeId(Id idMeta);
 
 }

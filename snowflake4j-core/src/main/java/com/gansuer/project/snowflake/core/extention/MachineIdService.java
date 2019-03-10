@@ -1,7 +1,7 @@
 package com.gansuer.project.snowflake.core.extention;
 
-import com.gansuer.project.snowflake.core.model.MachineId;
-import com.gansuer.project.snowflake.core.model.MachineIdConfig;
+import com.gansuer.project.snowflake.core.config.MachineIdConfig;
+import com.gansuer.project.snowflake.core.extention.model.MachineId;
 
 /**
  * 扩展点
@@ -13,4 +13,5 @@ public interface MachineIdService {
      * @return
      */
     MachineId getMachineId(MachineIdConfig config);
+
 }

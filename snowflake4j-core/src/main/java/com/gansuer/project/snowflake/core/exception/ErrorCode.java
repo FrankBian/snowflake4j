@@ -1,6 +1,6 @@
 package com.gansuer.project.snowflake.core.exception;
 
-public class ErrorCode {
+public final class ErrorCode {
 
 
     public static final int ILLEGAL_PARAMS = 1;

@@ -3,26 +3,38 @@ package com.gansuer.project.snowflake.core;
 import com.gansuer.project.snowflake.api.model.Id;
 import com.gansuer.project.snowflake.core.constant.SnowflakeConst;
 import com.gansuer.project.snowflake.core.exception.SnowflakeException;
-import com.gansuer.project.snowflake.core.support.Precondition;
+import com.gansuer.project.snowflake.core.extention.model.MachineId;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class IdGenerator {
 
-    private final Long dataCenterId;
-
-    private final Long workerId;
+    public static IdGenerator INSTANCE = null;
 
     private long lastTimestamp = -1L;
 
     private long sequence = 0L;
 
-    public IdGenerator(Long dataCenterId, Long workerId) {
+    private final MachineId machineId;
+
+    private IdGenerator(MachineId machineId) {
         log.warn("idGenerator initiate begin");
-        Precondition.preconditionDataCenterId(dataCenterId);
-        Precondition.preconditionWorkerId(workerId);
-        this.dataCenterId = dataCenterId;
-        this.workerId = workerId;
+//        Precondition.preconditionDataCenterId(dataCenterId);
+//        Precondition.preconditionWorkerId(workerId);
+        this.machineId = machineId;
+    }
+
+    public static IdGenerator getInstance(final MachineId machineId) {
+        if (Objects.isNull(INSTANCE)) {
+            synchronized (IdGenerator.class) {
+                if (Objects.isNull(INSTANCE)) {
+                    INSTANCE = new IdGenerator(machineId);
+                }
+            }
+        }
+        return INSTANCE;
+
     }
 
     public long nextId() {
@@ -44,8 +56,8 @@ public class IdGenerator {
         lastTimestamp = timestamp;
 
         return IdConverter.convert(new Id()
-            .setDataCenterId(dataCenterId)
-            .setWorkerId(workerId)
+            .setDataCenterId(machineId.getDataCenterId())
+            .setWorkerId(machineId.getWorkerId())
             .setTimestamp(lastTimestamp)
             .setSequence(sequence));
     }
