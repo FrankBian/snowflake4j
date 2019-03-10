@@ -1,5 +1,6 @@
 package com.gansuer.project.snowflake4j.rest.springboot;
 
+import com.gansuer.project.snowflake.api.Result;
 import com.gansuer.project.snowflake.api.model.Id;
 import com.gansuer.project.snowflake.core.IdConverter;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,22 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class IdController {
 
     @RequestMapping("/genId")
-    public long genId() {
-        return 0L;
+    public Result<Long> genId() {
+        return Result.succeedWith(0L);
     }
 
     @RequestMapping("/expId")
-    public Id expId(@RequestParam long id) {
-        return IdConverter.convert(id);
+    public Result<Id> expId(@RequestParam long id) {
+        return Result.succeedWith(IdConverter.convert(id));
     }
 
     @RequestMapping("/makeId")
-    public long makeId(@RequestParam("time") long timestamp,
+    public Result<Long> makeId(@RequestParam("time") long timestamp,
         @RequestParam("dcId") long dc,
         @RequestParam("workerId") long worker,
         @RequestParam("seq") long seq) {
 
-        return IdConverter.convert(new Id().setTimestamp(timestamp)
-            .setDataCenterId(dc).setWorkerId(worker).setSequence(seq));
+        return Result.succeedWith(IdConverter.convert(new Id().setTimestamp(timestamp)
+            .setDataCenterId(dc).setWorkerId(worker).setSequence(seq)));
     }
 }

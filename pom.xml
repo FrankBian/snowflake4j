@@ -12,6 +12,8 @@
         <module>snowflake4j-core</module>
         <module>snowflake4j-api</module>
         <module>snowflake4j-rest-springboot</module>
+        <module>snowflake4j-rest-netty</module>
+        <module>snowflake4j-dubbo</module>
     </modules>
     <properties>
         <spring.version>4.3.10.RELEASE</spring.version>
